@@ -9,12 +9,24 @@ class Solution {
         }
         
         int count = 0;
+        int r = 0;
+        int c =0;
         
         for(int i =0;i<m;i++){
-            for(int j =0;j<n;j++){
-                if(((a[i] + b[j])&1) ==1) count++;
+                if(((a[i])&1) ==1) {
+                    count+=n;
+                    r++;
+                }
+        }
+        
+        
+        for(int i =0;i<n;i++){
+            if(((b[i])&1) ==1) {
+                count+=m;
+                c++;
             }
         }
-        return count;
+        
+        return count - 2*r*c;
     }
 }
