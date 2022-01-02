@@ -1,3 +1,4 @@
+[Discussion Post (created on 2/0/2022 at 10:24)](https://leetcode.com/problems/add-to-array-form-of-integer/discuss/1661291/Java-Solution-not-the-fastest-but-very-intuitive)  
 <h2>989. Add to Array-Form of Integer</h2><h3>Easy</h3><hr><div><p>The <strong>array-form</strong> of an integer <code>num</code> is an array representing its digits in left to right order.</p>
 
 <ul>
