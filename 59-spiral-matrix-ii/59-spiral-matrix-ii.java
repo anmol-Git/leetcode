@@ -4,10 +4,6 @@ class Solution {
         
         int counter = 1;
         
-        for(int i =1;i<=n*n;i++){
-            mat[(i-1)/n][(i-1)%n] = i;
-        }
-        
         int uRow = 0;
         int rCol = n-1;
         int dRow = n-1;
