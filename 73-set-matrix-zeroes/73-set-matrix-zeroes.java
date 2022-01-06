@@ -17,9 +17,8 @@ class Solution {
         for(int i =0;i<rowArr.length;i++){
             for(int j =0;j<colArr.length;j++){
                 
-                if(rowArr[i] == 1 && colArr[j] == 1){
-                    for(int k=0;k<col;k++) matrix[i][k]=0;
-                    for(int m =0;m<row;m++) matrix[m][j]=0;
+                if(rowArr[i] == 1 || colArr[j] == 1){
+                    matrix[i][j] = 0;
                 }   
             }
         } 
