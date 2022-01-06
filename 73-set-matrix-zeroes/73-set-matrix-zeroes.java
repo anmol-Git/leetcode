@@ -1,6 +1,5 @@
 class Solution {
     public void setZeroes(int[][] matrix) {
-   //     int[][] arr = Arrays.stream(matrix).map(int[]::clone).toArray(int[][]::new);
         
         int row = matrix.length;
         int col = matrix[0].length;
@@ -15,8 +14,8 @@ class Solution {
                 }
             }
         }
-        for(int i =0;i<row;i++){
-            for(int j =0;j<col;j++){
+        for(int i =0;i<rowArr.length;i++){
+            for(int j =0;j<colArr.length;j++){
                 
                 if(rowArr[i] == 1 && colArr[j] == 1){
                     for(int k=0;k<col;k++) matrix[i][k]=0;
