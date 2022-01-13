@@ -1,12 +1,12 @@
 class Solution {
     public String restoreString(String s, int[] indices) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(s);
-        for(int i = 0;i<indices.length;i++){
-            char curr = s.charAt(i);
-            sb.deleteCharAt(indices[i]);
-            sb.insert(indices[i],curr);
+        int n = indices.length;
+        char[] arr = new char[n];
+        
+        for(int i =0;i<n;i++){
+            arr[indices[i]] =  s.charAt(i);
         }
-        return sb.toString();
+        
+        return String.valueOf(arr);
     }
 }
