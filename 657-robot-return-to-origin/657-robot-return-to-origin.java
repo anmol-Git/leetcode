@@ -3,8 +3,7 @@ class Solution {
         int countx =0;
         int county = 0;
         
-        for(int i = 0;i<moves.length();i++){
-            int curr  = moves.charAt(i);
+        for(char curr : moves.toCharArray()){
             
             if(curr == 'U') county++;
             
