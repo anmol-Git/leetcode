@@ -6,7 +6,7 @@ class Solution {
             
             if(s.charAt(i) == '0'){
                 
-                while(!q.isEmpty() && q.peek() < i - maxJump) q.poll();
+                while(!q.isEmpty() && q.peek() + maxJump < i) q.poll();
                 
                 if(q.isEmpty()) return false;
                 
