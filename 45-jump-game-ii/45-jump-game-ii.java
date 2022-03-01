@@ -7,11 +7,9 @@ class Solution {
             
             if(nums[i] + i >= nums.length-1) return count + 1;
             
-            int range = nums[i];
-            
             int max = -1;
             int maxInd = i;
-            for(int j = i; j <= i + range; j++) {
+            for(int j = i; j <= i + nums[i]; j++) {
                 if(nums[j] + j > max) {
                     max = nums[j] + j;
                     maxInd = j;
