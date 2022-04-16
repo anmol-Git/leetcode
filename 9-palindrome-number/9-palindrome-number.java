@@ -1,11 +1,27 @@
 class Solution {
     public boolean isPalindrome(int x) {
-        String s = String.valueOf(x);
+        //String s = String.valueOf(x);
+        if(x<0) return false;        
+        if(x == 0) return true;
+        int len = (int)Math.log10(x)+1;
+        
+        int[] arr = new int[len];
+        
+        int temp = x;
+        int index = 0;
+        
+        while(temp > 0) {
+            
+            arr[index++] = temp%10;
+            temp/=10;
+            
+        }
+        
         int start = 0;
-        int end = s.length()-1;
+        int end = len-1;
         
         while(start<end) {
-            if(s.charAt(start) != s.charAt(end)) return false;
+            if(arr[start] != arr[end]) return false;
             start++;
             end--;
         }
