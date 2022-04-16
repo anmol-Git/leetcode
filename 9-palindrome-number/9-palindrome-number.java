@@ -17,14 +17,24 @@ class Solution {
             
         }
         
-        int start = 0;
-        int end = len-1;
+//         int start = 0;
+//         int end = len-1;
         
-        while(start<end) {
-            if(arr[start] != arr[end]) return false;
-            start++;
-            end--;
+//         while(start<end) {
+//             if(arr[start] != arr[end]) return false;
+//             start++;
+//             end--;
+//         }
+//         return true;
+        String s = String.valueOf(x);
+        int i = 0;
+         while(i < len/2 + 1) {
+             String first = String.valueOf(arr[i]);
+             String second = String.valueOf(s.charAt(i));
+            if(!first.equals(second)) return false;
+            i++;
         }
+        
         return true;
     }
 }
