@@ -27,8 +27,9 @@ class Solution {
             
             if(map.containsKey(rem)) {
                 int index = map.get(rem);
-                return sb.substring(0,index) + "(" + 
-                       sb.substring(index,sb.length()) +")";
+                sb.insert(index,"(");
+                sb.append(")");
+                return sb.toString();
             }
            
             map.put(rem,sb.length());
