@@ -1,5 +1,5 @@
 # Alternate positive and negative numbers
-## Easy 
+##  Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an unsorted array <strong>Arr</strong> of <strong>N</strong> positive and negative numbers. Your task is to create an array of alternate positive and negative numbers without changing the relative order of positive and negative numbers.<br>
 <strong>Note: </strong>Array should start with positive number.</span><br>
