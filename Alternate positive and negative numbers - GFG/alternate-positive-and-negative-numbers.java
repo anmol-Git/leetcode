@@ -40,43 +40,42 @@ class Solution {
     void rearrange(int arr[], int n) {
         // code here
         
-        int i = 0;
-        int isEven = 1;
-        int j = 0;
-        while(i<arr.length){
-            if(isEven == 1) {
-               if(arr[i] < 0) {
-                    j = i;
-                    while(j<arr.length) {
-                        if(arr[j]>=0) break;
-                        j++;
-                    }
-                    if(j == arr.length) break;
-                    bringFront(arr,i,j);
-               } 
-            } 
-            else {
-                if(arr[i] >= 0) {
-                   j = i;
-                    while(j<arr.length) {
-                        if(arr[j]<0) break;
+        for(int i = 0;i<n;i++) {
+            
+            if((i&1) == 0){
+                if(arr[i] < 0) {
+                    int j = i+1;
+                    while(j < arr.length) {
+                        if(arr[j] >= 0) break;
                         j++;
                     }
                     if(j == arr.length) break;
                     bringFront(arr,i,j);
                 }
+                
+            } else {
+                if(arr[i] >= 0) {
+                    int j = i+1;
+                    
+                    while(j < arr.length) {
+                        if(arr[j] < 0) break;
+                        j++;
+                    }
+                    
+                    if(j == arr.length) break;
+                    bringFront(arr,i,j);
+                }
+                
             }
-            i++;
-            isEven = isEven ^ 1;
         }
-        
     }
     
-    static void bringFront(int[] arr,int start,int end) {
+    void bringFront(int[] arr ,int start, int end) {
         int temp = arr[end];
         
-        for(int i = end;i > start; i-- ){
-            arr[i] = arr[i-1];
+        while(end > start) {
+            arr[end] = arr[end-1];
+            end--;
         }
         
         arr[start] = temp;
