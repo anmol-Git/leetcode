@@ -7,8 +7,8 @@ class Solution {
         
         for(int i = 1;i<prices.length;i++) {
             
-            max = Math.max(max,prices[i]-min);
-            min = Math.min(min,prices[i]);
+            if(prices[i]-min > max) max = prices[i] - min;
+            if(min > prices[i]) min = prices[i];
         }
         return max;
     }
