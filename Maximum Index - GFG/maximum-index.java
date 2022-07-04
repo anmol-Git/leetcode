@@ -25,13 +25,10 @@ class Main {
 
 class Solution{
     
-    // A[]: input array
-    // N: size of array
-    // Function to find the maximum index difference.
     static int maxIndexDiff(int arr[], int n) { 
         
         // Your code here
-        int[] Rmax = new int[n];
+      //  int[] Rmax = new int[n];
         int[] Lmin = new int[n];
         
         int i = 1;
@@ -41,25 +38,24 @@ class Solution{
             i++;
         }
         
-        int j = n-2;
-        Rmax[n-1] = arr[n-1]; 
-        while(j >= 0) {
-            Rmax[j] = Math.max(arr[j], Rmax[j+1]);
-            j--;
-        }
+        int j = n-1;
+        // Rmax[n-1] = arr[n-1]; 
+        // while(j >= 0) {
+        //     Rmax[j] = Math.max(arr[j], Rmax[j+1]);
+        //     j--;
+        // }
         
-        i = 0;
-        j = 0;
+        i = n-1;
         
         int ans = 0;
         
-        while(i < n && j < n) {
-            if(Rmax[i] >= Lmin[j]) {
-                ans = Math.max(ans,i-j);
-                i++;
+        while(i >= 0 && j >=0) {
+            if(arr[i] >= Lmin[j]) {
+                ans = Math.max(ans,i - j);
+                j--;
             }
             else {
-                j++;
+                i--;
             }
         }
         
