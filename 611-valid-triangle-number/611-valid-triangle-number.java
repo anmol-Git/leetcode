@@ -14,7 +14,6 @@ class Solution {
                 if(nums[i] < nums[j] + nums[k]) {
                     
                     count += k - j;
-                    j = 0;
                     k--;
                     
                 }
