@@ -1,33 +1,39 @@
 class Solution {
-    public List<Integer> spiralOrder(int[][] mat) {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        
         List<Integer> list = new ArrayList<>();
+        
         int uRow = 0;
-        int rCol = mat[0].length-1;
-        int dRow = mat.length-1;
+        int dRow = matrix.length - 1;
+        int rCol = matrix[0].length - 1;
         int lCol = 0;
         
-        while(lCol<=rCol && uRow<=dRow){
+        while(uRow <= dRow && lCol <= rCol) {
             
-            for(int i =lCol;i<=rCol;i++){
-                list.add(mat[uRow][i]);
-            }
+            int i = lCol;
+            while(i <= rCol) list.add(matrix[uRow][i++]);
+            
             uRow++;
             
-            for(int i =uRow;i<=dRow;i++){
-                list.add(mat[i][rCol]);
-            }
+            i = uRow;
+            while(i <= dRow) list.add(matrix[i++][rCol]);
+            
             rCol--;
-            if(uRow>dRow || rCol<lCol) return list;
-            for(int i =rCol;i>=lCol;i--){
-                list.add(mat[dRow][i]);
-            }
+            
+            if(uRow > dRow || rCol < lCol) return list;
+            
+            i = rCol;
+            while(i >= lCol) list.add(matrix[dRow][i--]);
+            
             dRow--;
             
-            for(int i =dRow;i>=uRow;i--){
-                list.add(mat[i][lCol]);
-            }
+            i = dRow;
+            
+            while(i >= uRow) list.add(matrix[i--][lCol]);
+            
             lCol++;
         }
+            
         return list;
     }
 }
