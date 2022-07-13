@@ -14,13 +14,13 @@ class Solution {
             while(i <= rCol) list.add(matrix[uRow][i++]);
             
             uRow++;
-            
+            if(uRow > dRow ) return list;
             i = uRow;
             while(i <= dRow) list.add(matrix[i++][rCol]);
             
             rCol--;
             
-            if(uRow > dRow || rCol < lCol) return list;
+            if(rCol < lCol) return list;
             
             i = rCol;
             while(i >= lCol) list.add(matrix[dRow][i--]);
