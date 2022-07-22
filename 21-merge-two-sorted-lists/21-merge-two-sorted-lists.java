@@ -47,20 +47,12 @@ class Solution {
             
         }
         
-        while(list1 != null) {
-            ListNode temp = new ListNode();
-            temp.val = list1.val;
-            temphead.next = temp;
-            list1 = list1.next;
-            temphead = temphead.next;
+        if(list1 != null) {
+            temphead.next = list1;
         }
         
-        while(list2 != null) {
-            ListNode temp = new ListNode();
-            temp.val = list2.val;
-            temphead.next = temp;
-            list2 = list2.next;
-            temphead = temphead.next;
+        if(list2 != null) {
+            temphead.next = list2;
         }
         
         return head;
