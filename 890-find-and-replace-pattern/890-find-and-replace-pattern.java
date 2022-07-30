@@ -8,19 +8,29 @@ class Solution {
         return ans;
     }
 
-    public boolean match(String word, String pattern) {
-        Map<Character, Character> m1 = new HashMap();
-        Map<Character, Character> m2 = new HashMap();
+  public boolean match(String sString, String tString) {
 
-        for (int i = 0; i < word.length(); ++i) {
-            char w = word.charAt(i);
-            char p = pattern.charAt(i);
-            if (!m1.containsKey(w)) m1.put(w, p);
-            if (!m2.containsKey(p)) m2.put(p, w);
-            if (m1.get(w) != p || m2.get(p) != w)
-                return false;
+        char[] s = sString.toCharArray();
+        char[] t = tString.toCharArray();
+
+        int length = s.length;
+        if(length != t.length) return false;
+
+        char[] sm = new char[256];
+        char[] tm = new char[256];
+
+        for(int i=0; i<length; i++){
+            char sc = s[i];
+            char tc = t[i];
+            if(sm[sc] == 0 && tm[tc] == 0){
+                sm[sc] = tc;
+                tm[tc] = sc;
+            }else{
+                if(sm[sc] != tc || tm[tc] != sc){
+                    return false;
+                }
+            }
         }
-
         return true;
     }
 }
