@@ -35,16 +35,14 @@ class Solution {
         
         TreeNode node = root;
         
-        while(true) {
+        while(!stack.isEmpty() || node != null) {
             
             while(node != null) {
                 
                 stack.push(node);
                 node = node.left;
             }
-            if(stack.isEmpty()) break;
-            
-            
+                        
             node = stack.pop();
             list.add(node.val);
             node = node.right;
