@@ -23,7 +23,7 @@ class Solution {
                 score--;
                 end--; 
             }
-            else start++;
+            else return max;
             
             max = Math.max(max, score);
         }
