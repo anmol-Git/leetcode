@@ -1,31 +1,30 @@
 class Solution {
     public int[] findOriginalArray(int[] changed) {
         
-            
-        if(changed.length%2!=0) return new int[0];
+        int len = changed.length;
         
-        int mid = changed.length/2;
-        
-        int[] res = new int[mid];
+        if((len&1) == 1) return new int[0];
+                
+        int[] res = new int[len/2];
         
         int[] freq = new int[100001];
         
-        for(int no : changed)
-            freq[no]++;
+        for(int val : changed)
+            freq[val]++;
         
         
-        int idx=0;
+        int index=0;
         
-        for(int no=0; no<freq.length; no++){
+        for(int i = 0;i < freq.length; i++){
             
-            while(freq[no] > 0 && no*2 < 100001 && freq[no*2]>0){
-                freq[no]--;
-                freq[no*2]--;
-                res[idx++] = no;
+            while(freq[i] > 0 && i * 2 < 100001 && freq[i*2] > 0){
+                freq[i]--;
+                freq[i*2]--;
+                res[index++] = i;
             }
         }
         
-        for(int i=0; i<freq.length; i++){
+        for(int i = 0; i < freq.length; i++){
             if(freq[i]!=0) return new int[0];
         }
         
