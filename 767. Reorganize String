@@ -1,0 +1,111 @@
+//using Map
+class Solution {
+    public String reorganizeString(String s) {
+
+        int n = s.length();
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for(int i = 0; i < n; i++) {
+
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+
+        }
+
+        int maxEntry = -1;
+        char ch = '*';
+
+        for(Map.Entry<Character, Integer> m : map.entrySet()) {
+
+            if(m.getValue() > maxEntry) {
+                 maxEntry = m.getValue(); 
+                 ch = m.getKey();
+            }
+
+        }
+
+        map.remove(ch);
+
+        if((n&1) == 1) {
+
+                if(maxEntry > (n / 2) + 1) return "";
+            }
+            else {
+
+                if(maxEntry > n / 2) return "";
+
+            }
+
+             char[] res = new char[n];
+        
+            int index = 0;
+
+            while(maxEntry > 0) {
+                res[index] = ch;
+                index += 2;
+                maxEntry--;
+                if(index >= n) index = 1;
+            }
+
+            for(Map.Entry<Character, Integer> m : map.entrySet()) {
+                
+                int count = m.getValue();
+
+                while(count > 0) {
+                    res[index] = m.getKey();
+                    index += 2;
+                    count--;
+                    if(index >= n) index = 1;
+                }
+
+            }
+        
+        
+
+        return String.valueOf(res);
+    }
+}
+
+
+//using array 
+
+class Solution {
+    public String reorganizeString(String s) {
+        if(s.length() <= 1){
+            return s;
+        }
+        int[] charCount = new int[26];
+        for(char c : s.toCharArray()){
+            charCount[c-'a']++;
+        }
+        int max = 0;
+        int letter = 0;
+        for(int i = 0; i < charCount.length; i++){
+            if(charCount[i] > max){
+                max = charCount[i];
+                letter = i;
+            }
+        }
+        if(max > (s.length() + 1) / 2){
+            return "";
+        }
+        int index = 0;
+        char[] res = new char[s.length()];
+        while(charCount[letter] > 0){
+            res[index] = (char) (letter + 'a');
+            index += 2;
+            charCount[letter]--;
+        }
+        for(int i = 0; i < charCount.length; i++){
+            while(charCount[i] > 0){
+                if(index >= s.length()){
+                    index = 1;
+                }
+                res[index] = (char) (i + 'a');
+                index += 2;
+                charCount[i]--;
+            }
+        }
+        return String.valueOf(res);
+    }
+}
