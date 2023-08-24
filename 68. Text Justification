@@ -1,0 +1,102 @@
+class Solution {
+  public List<String> fullJustify(String[] words, int maxWidth) {
+
+        int n = words.length;
+
+        int ind = 0;
+
+        List<String> list = new ArrayList<>();
+
+        while(ind < n) {
+
+            int count = ind;
+
+            int word = 0;
+
+            int space = 0;
+
+            while(word <= maxWidth && count < n) {
+
+
+                if(word + words[count].length() == maxWidth) {
+                     if(count == n - 1) {
+                        word += words[count].length();
+                         space = maxWidth - word;
+                        break;
+                    }
+                    word += words[count].length();
+                    count++;
+                }
+                else if(word + words[count].length() < maxWidth) {
+                    if(count == n - 1) {
+                        word += words[count].length();
+                         space = maxWidth - word;
+                        break;
+                    } else {
+                        word += words[count].length();
+                        word += 1;
+                        count++;
+                        space++;
+                    }
+
+                }
+                else {
+                    space += maxWidth - word;
+                    count--;
+                    break;
+                }
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            int haveSpace = 0;
+            int rem = 0;
+
+            if(count - ind > 0) {
+                haveSpace = space / (count - ind);
+                rem = space % (count - ind);
+            }
+            else haveSpace = space;
+
+            if(count - ind == 1) space = 0;
+
+            if(count == n - 1) {
+
+                for(int i = ind; i <= count && count < n; i++) {
+                    sb.append(words[i]);
+                   if(i != count) sb.append(' ');
+                }
+
+                int remainingSpace = maxWidth - sb.length();
+
+                while(remainingSpace > 0) {
+                    sb.append(' ');
+                    remainingSpace--;
+                } 
+            }
+            else {
+                for(int i = ind; i <= count && count < n; i++) {
+                sb.append(words[i]);
+
+                    if(count - ind != 1) {
+                        if(rem > 0) {
+                            sb.append(' ');
+                            rem--;
+                        }
+                    }
+                    if(i != count || ind == count)
+                        for(int k = 0; k < haveSpace; k++) {
+                        sb.append(' ');
+                    }
+            }
+            }
+
+            list.add(sb.toString());
+
+            ind = count + 1;
+
+        }
+
+        return list;
+    }
+}
