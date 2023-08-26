@@ -1,0 +1,51 @@
+// DP solution
+class Solution {
+    public int findLongestChain(int[][] pairs) {
+
+        Arrays.sort(pairs, (a, b) -> a[0] - b[0]);
+
+        
+        int n = pairs.length;
+        int[][] dp = new int[n + 1][n + 1];
+
+        for(int[] arr : dp) {
+
+            Arrays.fill(arr, -1);
+        }
+
+        return solve(pairs, -1, 0, dp);
+    }
+
+    int solve(int[][] pairs, int i, int j, int[][] dp) {
+        if(i == pairs.length || j == pairs.length) return 0;
+
+        if(dp[i + 1][j] != -1) return dp[i + 1][j];
+        
+    if(i == -1 || pairs[i][1] < pairs[j][0]) return dp[i + 1][j] = Math.max(solve(pairs, i , j + 1, dp),1 + solve(pairs, j, j + 1, dp));
+
+    return dp[i + 1][j] = solve(pairs, i , j + 1, dp);
+    }
+}
+
+
+// Greedy Solution
+
+class Solution {
+    public int findLongestChain(int[][] pairs) {
+        Arrays.sort(pairs, (a, b) -> a[1] - b[1]);
+
+        int maxLen = 1;
+        int end = pairs[0][1];
+
+        for(int i = 1; i < pairs.length; i++) {
+
+            if(pairs[i][0] > end){
+                maxLen++;
+                end = pairs[i][1];
+            } 
+
+        }
+
+        return maxLen;
+    }
+}
