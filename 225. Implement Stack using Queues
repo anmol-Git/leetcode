@@ -1,0 +1,101 @@
+// with 2 stacks
+class MyStack {
+
+    Queue<Integer> first;
+    Queue<Integer> second;
+    int top = -1;
+
+    public MyStack() {
+        first = new LinkedList<>();
+        second = new LinkedList<>();
+    }
+    
+    public void push(int x) {
+        top = x;
+        first.add(x);
+    }
+    
+    public int pop() {
+
+        int size = first.size();
+
+        if(size == 1) {
+            top = -1;
+            return first.remove();
+        }
+
+
+        while(size > 2) {
+            int removed = first.remove();
+            first.add(removed);
+            size--;
+        }
+
+        int newTop = first.remove();
+        first.add(newTop);
+        top = newTop;
+
+        int pop = first.remove();
+
+        return pop;
+    }
+    
+    public int top() {
+
+        return top;
+    }
+    
+    public boolean empty() {
+        return first.isEmpty();
+    }
+}
+
+// using 1 stack
+class MyStack {
+
+    Queue<Integer> first;
+    int top = -1;
+
+    public MyStack() {
+        first = new LinkedList<>();
+    }
+    
+    public void push(int x) {
+        top = x;
+        first.add(x);
+    }
+    
+    public int pop() {
+
+        int size = first.size();
+
+        if(size == 1) {
+            top = -1;
+            return first.remove();
+        }
+
+
+        while(size > 2) {
+            int removed = first.remove();
+            first.add(removed);
+            size--;
+        }
+
+        int newTop = first.remove();
+        first.add(newTop);
+        top = newTop;
+
+        int pop = first.remove();
+
+        return pop;
+    }
+    
+    public int top() {
+
+        return top;
+    }
+    
+    public boolean empty() {
+        return first.isEmpty();
+    }
+}
