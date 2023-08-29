@@ -1,0 +1,64 @@
+class Solution {
+    public int bestClosingTime(String customers) {
+        //"YYNY"
+        //if shop open and N so penalty +=1
+        // if shop is closed and Y so penalty +=1
+        // closes at jth hour, means the shop is closed at j
+        int n = customers.length();
+        int[] preCountN = new int[n]; 
+        int[] postCountY = new int[n]; 
+        int min = Integer.MAX_VALUE;
+        int minInd = -1;
+
+        for(int i = 0; i < n; i++) {
+            char ch = customers.charAt(i);
+            if(i == 0 ) {
+               if(ch == 'N') preCountN[i] = 1;
+
+            }
+            else if(ch == 'N') {
+
+                preCountN[i] = preCountN[i - 1] + 1;
+            }
+            else preCountN[i] = preCountN[i - 1];
+
+        }
+
+        for(int i = n - 1; i >= 0; i--) {
+            char ch = customers.charAt(i);
+            if(i == n - 1 )  {
+                if(ch == 'Y') postCountY[i] = 1;
+            }
+            else if(ch == 'Y') {
+                
+                postCountY[i] = postCountY[i + 1] + 1;
+            }
+
+            else postCountY[i] = postCountY[i + 1];
+        }
+
+        for(int i = 0; i < n; i++) {
+            int cy = 0;
+            int cn = 0;
+
+            if(i - 1 >= 0) cn = preCountN[i - 1];
+             cy = postCountY[i];
+
+
+            int curr = cn + cy;
+
+            if(curr < min) {
+                min = curr;
+                minInd = i ; 
+            } 
+
+        }
+
+        if(preCountN[n - 1] < min) {
+            min = preCountN[n - 1];
+            minInd = n;
+        }
+  
+        return minInd;
+    }
+}
