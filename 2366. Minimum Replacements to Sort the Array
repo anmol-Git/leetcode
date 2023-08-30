@@ -1,0 +1,24 @@
+class Solution {
+    public long minimumReplacement(int[] nums) {
+        long count = 0;
+        int n = nums.length;
+ 
+        int i = n - 1;
+        int bound = nums[n - 1];
+        while( i >= 0) {
+
+                if(nums[i] > bound) {
+                        int times = nums[i] / bound;  
+                        if(nums[i] % bound != 0) times++;
+                        bound = nums[i] / times;
+                         count += times - 1;
+                }
+                else {
+                    bound = nums[i];
+                }
+                i--;
+        }
+
+        return count;
+    }
+}
