@@ -1,0 +1,46 @@
+// o(nlogn) solution
+
+class Solution {
+    public int[] countBits(int n) {
+
+        int[] ans = new int[n + 1];
+
+        int index = 0;
+
+        while(index <= n) {
+            int temp = index;
+            int count = 0;
+
+            while(temp != 0) {
+
+                if((temp&1) == 1) count++;
+
+                temp = temp >> 1;
+
+            }
+
+            ans[index] = count;
+            index++;
+        }
+
+        return ans;
+
+    }
+}
+
+// O(n) solution
+
+class Solution {
+    public int[] countBits(int n) {
+        int[] ans = new int[n + 1];
+        int offset = 1;
+
+        for(int i = 1; i <= n; i++) {
+            if(offset * 2 == i) offset = 2 * offset;
+
+            ans[i] = 1 + ans[i - offset];
+        }
+
+        return ans;
+    }
+}
