@@ -1,0 +1,27 @@
+class Solution {
+    public int minExtraChar(String s, String[] dictionary) {
+        int n = s.length();
+        int[] dp = new int[n + 1];
+
+        Arrays.fill(dp, -1);
+
+        return solve(s, dictionary, 0, dp, n);
+    }
+
+    int solve(String s, String[] dictionary, int index, int[] dp, int len) {
+        if(index == len) return 0;
+
+        if(dp[index] != -1) return dp[index];
+
+        int min =  1 + solve(s, dictionary, index + 1, dp, len);
+
+        for(String str : dictionary) {
+            int wordlen = str.length();
+            if(wordlen + index <= len && str.equals(s.substring(index, index + wordlen))) {
+                min = Math.min(min, solve(s, dictionary, index + wordlen, dp, len));
+            }
+        }
+
+        return dp[index] = min;
+    }
+}
