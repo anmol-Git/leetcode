@@ -1,0 +1,53 @@
+// memoization solution
+class Solution {
+    static int mod = 1000000007;
+    public int countOrders(int n) {
+        // 5 p 5 d
+        int[][] dp = new int[n + 1][n + 1];
+
+        for(int[] arr : dp) Arrays.fill(arr, -1);
+
+        return solve(0, 0, n, dp);    
+    }
+
+    int solve(int pickup, int delivery, int n, int[][] dp) {
+        
+        if(pickup > n || delivery > n) return 0;
+        if(pickup == n && delivery == n) return 1;
+
+        if(dp[pickup][delivery] != -1) return dp[pickup][delivery];
+
+        long count = 0;
+
+        for(int k = 0; k < n - pickup; k++) {
+            count = (count + solve(pickup + 1, delivery, n, dp))%mod;
+        }
+
+        for(int k = 0; k < pickup - delivery; k++) {
+            count = (count + solve(pickup, delivery + 1, n, dp))%mod;
+        }
+
+
+        return dp[pickup][delivery] = (int)(count%mod);
+    }
+}
+
+// optimized DP solution
+class Solution {
+    static int mod = 1000000007;
+    public int countOrders(int n) {
+        long[] dp = new long[n + 1];
+        dp[1] = 1;
+        if(n == 1) return (int)dp[1];
+        dp[2] = 6;
+
+        for(int i = 3; i <= n; i++) {
+            int num = (2 * i) - 1;
+            long combination = num * (num + 1)/2;
+
+            dp[i] = (dp[i - 1] * combination)%mod;
+        }
+
+        return (int)(dp[n]%mod);   
+    }
+}
