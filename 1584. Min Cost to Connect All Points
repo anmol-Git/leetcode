@@ -1,0 +1,55 @@
+class Solution {
+    public int minCostConnectPoints(int[][] points) {
+        int n = points.length;
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        HashSet<Integer> set = new HashSet<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.weight - b.weight);
+        int cost = 0;
+
+        for(int i = 0; i < n; i++) {
+             adj.add(new ArrayList<>());
+        }
+
+        for(int i = 0; i < n; i++) {
+
+        for(int j  = i + 1; j < n; j++) {
+
+                int dist = Math.abs(points[i][0] - points[j][0]) + 
+                            Math.abs(points[i][1] - points[j][1]);
+                
+                adj.get(i).add(new Pair(j, dist)); 
+                adj.get(j).add(new Pair(i, dist)); 
+
+            }
+        }
+
+        pq.add(new Pair(0,0));
+
+        while(set.size() < n) {
+            Pair pop = pq.remove();
+
+            if(set.contains(pop.node)) continue;
+
+            set.add(pop.node);
+            cost  += pop.weight;
+
+            for(Pair p : adj.get(pop.node)) {
+                if(!set.contains(p.node)) {
+                    pq.add(new Pair(p.node, p.weight));
+                }
+            }
+        }
+
+        return cost;
+    }
+
+    class Pair {
+    int weight;
+    int node;
+
+    Pair(int node, int weight) {
+        this.node = node;
+        this.weight = weight;
+    }
+  }
+}
