@@ -1,0 +1,41 @@
+class Solution {
+    private static final int[][] DIRECTIONS = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    
+    public int minimumEffortPath(int[][] heights) {
+        int rows = heights.length;
+        int columns = heights[0].length;
+        
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> a[2] - b[2]);
+        minHeap.offer(new int[]{0, 0, 0}); 
+        
+        boolean[][] visited = new boolean[rows][columns];
+        
+        while (!minHeap.isEmpty()) {
+            int[] cell = minHeap.poll();
+            int row = cell[0];
+            int col = cell[1];
+            int effort = cell[2];
+            
+            visited[row][col] = true;
+            
+            if (row == rows - 1 && col == columns - 1) {
+                return effort;
+            }
+            
+            for (int[] dir : DIRECTIONS) {
+                int newRow = row + dir[0];
+                int newCol = col + dir[1];
+                
+                if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < columns && !visited[newRow][newCol]) {
+                    
+                    int newEffort = Math.max(effort, Math.abs(heights[newRow][newCol] - heights[row][col]));
+                    
+                   
+                    minHeap.offer(new int[]{newRow, newCol, newEffort});
+                }
+            }
+        }
+        
+        return -1; 
+    }
+}
