@@ -1,0 +1,44 @@
+class Solution {
+    public int shortestPathLength(int[][] graph) {
+        int n = graph.length;
+
+        if(n == 1) return 0;
+
+        int finalState = (1 << n) - 1;
+
+        boolean[][] vis = new boolean[n][finalState + 1];
+
+        int shortest = 0;
+
+        Queue<int[]> q = new LinkedList<>();
+
+        for(int i = 0; i < n; i++) {
+            q.add(new int[]{i, 1 << i});
+        }
+
+        while(!q.isEmpty()) {
+            int size = q.size();
+            shortest++;
+
+            for(int i = 0; i < size; i++) {
+                int[] curr = q.poll();
+                int originalState = curr[1];
+                int currnode = curr[0];
+
+                for(int neigbour : graph[currnode]) {
+                
+                int newState = originalState | 1 << neigbour;
+                
+                if(vis[neigbour][newState]) continue;
+
+                vis[neigbour][newState] = true;
+
+                if(newState == finalState) return shortest;
+
+                q.add(new int[]{neigbour, newState});
+                }
+            }
+        }
+        return -1;
+    }
+}
