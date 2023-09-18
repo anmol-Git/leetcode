@@ -1,0 +1,38 @@
+class Solution {
+    public int[] kWeakestRows(int[][] mat, int k) {
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        
+
+        for(int i = 0; i < mat.length; i++) {
+
+            int count = getCount(mat[i]);
+
+            pq.add(new int[]{i, -count});
+
+            if(pq.size() > k) pq.remove();
+        }
+
+        int[] res = new int[k];
+
+        int ind = 0;
+
+        while(ind < k) {
+            res[ind++] = pq.remove()[0];
+        }
+
+        return res;
+    }
+
+    int getCount(int[] arr) {
+        int count = 0;
+
+        int ind = 0;
+        while(ind  < arr.length && arr[ind] == 1) {
+            count++;
+            ind++;
+        }
+
+        return count;
+    }
+}
