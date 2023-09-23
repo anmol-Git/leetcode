@@ -1,0 +1,58 @@
+// LIS Not related to this question just for refrence
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        int max = 1;
+        for(int i=1; i < n; i++){
+            for(int j=0; j <= i-1; j++){
+                if(nums[i] > nums[j])
+                    dp[i] = Math.max(dp[i], 1 + dp[j]);
+            }
+            max = Math.max(max, dp[i]);
+        }
+        return max;
+    }
+}
+
+// Longest Srting Chain Solution
+class Solution {
+    public int longestStrChain(String[] words) {
+        int n = words.length;
+        Arrays.sort(words, (a,b) -> a.length() - b.length());
+
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        int max = 1;
+
+        for(int i = 1; i < n; i++) {
+            
+            for(int j = 0; j < i ; j++) {
+                
+                if(compare(words[i], words[j])) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            max = Math.max(dp[i], max);
+        }
+
+        return max;
+    }
+
+    boolean compare(String a, String b) {
+        int n = a.length();
+        int m = b.length();
+
+        if(m  + 1 != n) return false;
+        int i = 0;
+        int j = 0;
+
+        while(i < n  && j < m) {
+            if(a.charAt(i) == b.charAt(j)) j++;
+            i++;
+        }
+
+        return j == m;
+    }
+}
