@@ -1,0 +1,35 @@
+class Solution {
+    public String decodeAtIndex(String s, int k) {
+        long length = 0;
+        int n = s.length();
+        int i = 0;
+
+        for(i = 0; i < n; i++) {
+
+            if(Character.isDigit(s.charAt(i))) {
+                length *= (s.charAt(i) - '0');
+            }
+            else length++;
+        }
+
+        for(int j = n - 1; j >= 0; j--) {
+            char c = s.charAt(j);
+
+            if(Character.isDigit(c)) {
+                
+                length /= (c - '0');
+
+                k %= length;
+
+            } else {
+
+                if(k == 0 || length == k) return Character.toString(c);
+
+                length--;
+            }
+        }
+
+          return "";
+
+    }
+}
