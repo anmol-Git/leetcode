@@ -1,0 +1,46 @@
+class Solution {
+    public boolean find132pattern(int[] nums) {
+        int min = nums[0];
+        Stack<Pair> st = new Stack<>();
+
+        // starting with 1 because need min till i - 1
+        for(int i = 1; i < nums.length; i++) {
+            
+            // is current number is greater than we will have to remove
+            // all the smaller element in order to maintain increasing
+            // order of the stack
+            while(!st.isEmpty() && nums[i] >= st.peek().num) {
+                st.pop();
+            }
+
+            // now either the st is empty or the number present is
+            // greater than the current this is our potiental j
+            // if the min store in the st.peek() is less than the 
+            // current number then there is value previous of the
+            // potiental j that is smaller than the current element
+            // which means we found the required 1 3 2 sequence
+            if(!st.isEmpty() && st.peek().min < nums[i]) {
+                return true;
+            }
+
+            // push the number int the stack along with the min till
+            // i - 1 index
+            st.push(new Pair(nums[i], min));
+
+            // update the min till curr index
+            min = Math.min(nums[i], min);
+        }
+
+        return false;
+    }
+
+    class Pair {
+        int num;
+        int min;
+
+        Pair(int num, int min) {
+            this.num = num;
+            this.min = min;
+        }
+    }
+}
