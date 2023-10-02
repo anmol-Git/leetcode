@@ -1,0 +1,31 @@
+class Solution {
+    public boolean winnerOfGame(String sb) {
+        
+        // no of moves greater means victory ??
+
+        int alice = 0;
+        int bob = 0;
+        int countA = 0;
+        int countB = 0;
+
+        for(int i = 0; i < sb.length(); i++) {
+            
+                if(sb.charAt(i) == 'A') countA++;
+                else {
+                    alice += Math.max(countA - 2, 0);
+                    countA = 0;
+                }
+
+                if(sb.charAt(i) == 'B') countB++;
+                else {
+                    bob += Math.max(countB - 2, 0);
+                    countB = 0;
+                }
+        }
+
+        if(countA > 0) alice += Math.max(countA - 2, 0);
+        if(countB > 0) bob += Math.max(countB - 2, 0);
+
+        return alice > bob;
+    }
+}
