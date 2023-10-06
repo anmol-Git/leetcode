@@ -1,0 +1,38 @@
+class Solution {
+    public int integerBreak(int n) {
+      int[] dp = new int[n + 1];
+      dp[1] = 1; 
+      dp[2] = 1;
+
+      for(int i = 2; i <= n; i++) {
+
+           dp[i] = i == n ? 0 : i;
+
+          for(int j = 1; j < i; j++) {
+
+              dp[i] = Math.max(dp[i], dp[j] * dp[i - j]);
+
+          }
+      }
+
+
+       return dp[n];
+    }
+
+    int solve(int num , int n, int[] dp) {
+
+        if(num == 1) return 1;
+
+        if(dp[num] != -1) return dp[num];
+
+        int res = num == n ? 0 : num;
+
+        for(int i = 1; i < num; i++) {
+            int val = solve(i, n, dp) * solve(num - i, n, dp);
+
+            res = Math.max(res, val);
+        }
+
+        return dp[num] = res;
+    }
+}
