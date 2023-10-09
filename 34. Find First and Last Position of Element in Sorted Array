@@ -1,0 +1,48 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int first = first(nums, target);
+        int last = last(nums, target);
+
+        if(isValidValues(nums, target, first, last)) return new int[]{-1, -1};
+
+        return new int[]{first, last};
+    }
+
+    int first(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length - 1;
+
+        while(start <= end) {  
+
+            int mid = start + (end - start)/2;
+
+            if(target > nums[mid]) start = mid + 1;
+
+            else end = mid - 1;
+        }
+
+        return start;
+    }
+
+
+    int last(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length - 1;
+
+        while(start <= end) { 
+
+            int mid = start + (end - start)/2;
+
+            if(target >= nums[mid]) start = mid + 1;
+
+            else end = mid - 1;
+        }
+
+        return end;
+    }
+
+    boolean isValidValues(int[] nums, int target, int first, int last) {
+      return first == -1 || first == nums.length || last == -1 ||
+       last == nums.length || nums[first] != target || nums[last] != target;
+    }
+}
