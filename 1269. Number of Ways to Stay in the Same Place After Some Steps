@@ -1,0 +1,27 @@
+class Solution {
+    static int mod = 1000000007;
+    public int numWays(int steps, int arrLen) {
+
+         int n = Math.min(steps, arrLen);
+
+       
+        long[][] dp = new long[steps + 1][n + 1];
+        for(long[] arr : dp) Arrays.fill(arr, -1);
+        return (int)(solve(steps, arrLen, 0, 0, dp) % mod);
+    }
+
+    long solve(int steps, int arrLen, int curr, int ind, long[][] dp) {
+
+        if(ind >= arrLen || ind < 0 || curr > steps) return 0;
+
+        if(curr == steps && ind == 0) return 1;
+
+        if(dp[curr][ind] != -1) return dp[curr][ind];
+
+        long right = solve(steps, arrLen, curr + 1, ind + 1, dp) % mod;
+        long left = solve(steps, arrLen, curr + 1, ind - 1, dp) % mod;
+        long stay = solve(steps, arrLen, curr + 1, ind, dp) % mod;
+
+        return dp[curr][ind] = (right + left + stay) % mod;
+    }
+}
