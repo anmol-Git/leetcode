@@ -1,0 +1,32 @@
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+
+        correctString(sb1, s);
+        correctString(sb2, t);
+
+        return sb1.toString().equals(sb2.toString());
+    }
+
+    void correctString(StringBuilder sb, String s) {
+
+        int len = s.length();
+        int ind = 0;
+        
+        while(ind < len) {
+            char ch = s.charAt(ind);
+            if(ch == '#') {
+                int j = sb.length() - 1;
+
+                if(j >= 0) {
+                    sb.deleteCharAt(j);
+                    j--;
+                }
+            }
+            else sb.append(ch);
+
+            ind++;
+        }
+    }
+}
