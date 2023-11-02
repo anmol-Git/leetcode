@@ -1,0 +1,33 @@
+class Solution {
+    public int carFleet(int target, int[] position, int[] speed) {
+        
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+
+        int n = position.length;
+
+        for(int i = 0; i < n; i++) {
+
+            pq.add(new int[]{position[i], speed[i]});
+        }  
+
+
+        float lastTime = 0;
+        int fleet = 0;
+
+        while(!pq.isEmpty()) {
+
+            int[] pop = pq.remove();
+
+            float dist = lastTime * pop[1]; 
+
+            float distToCover = target - pop[0]; 
+
+            if(distToCover > dist) {
+                fleet++;
+                lastTime = distToCover / pop[1];
+            }
+        }
+
+        return fleet;
+    }
+}
