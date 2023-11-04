@@ -1,0 +1,43 @@
+class Solution {
+    public int search(int[] nums, int target) {
+
+        int start = 0;
+        int end = nums.length - 1;
+
+        while(start <= end) {
+
+            int mid = start + (end - start) / 2;
+
+            if(nums[mid] == target) return mid;
+
+            System.out.println(mid);
+                // curr is greater than target
+                if(target < nums[mid]) {
+
+                    // if it's after the pivot index
+                    if(nums[mid] < nums[0]) {
+                         end = mid - 1;
+                    }
+                    else {
+                        if(target >= nums[start]) end = mid - 1;
+                        else start = mid + 1;
+                    }
+                }
+
+                // if curr is smaller than target
+                else {
+
+                    // after the pivot index    
+                    if(nums[mid] < nums[0]) {
+                        if(target <= nums[nums.length - 1]) start = mid + 1;
+                        else end = mid - 1;    
+                    }
+                    else {
+                       start = mid + 1;
+                    }
+                }
+        }
+        
+        return -1;
+    }
+}
