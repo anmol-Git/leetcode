@@ -1,0 +1,41 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+
+        int[] freq = new int[26];
+
+        for(int i = 0; i < s1.length(); i++) {
+
+            freq[s1.charAt(i) - 'a']++;
+
+        }
+
+        int[] temp = new int[26];
+        
+        for(int i = 0; i < s2.length(); i++) {
+
+            if(i >= s1.length()) {
+                boolean equal = true;    
+
+                for(int j = 0; j < 26; j++) {
+                
+                    if(temp[j] != freq[j]) equal = false;
+                
+                }
+
+                char c = s2.charAt(i - s1.length());
+                temp[c - 'a']--;
+
+                if(equal) return true;
+            }
+
+             temp[s2.charAt(i) - 'a']++;
+        }
+
+        for(int j = 0; j < 26; j++) {
+            if(temp[j] != freq[j]) return false;
+            if(j == 25) return true;
+        } 
+
+        return false;
+    }
+}
